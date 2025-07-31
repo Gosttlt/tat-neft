@@ -11,14 +11,7 @@ const App = () => {
   return (
     <div className='wrapper'>
       {cities.map(({cityName, latitude, longitude}) => (
-        <div
-          key={cityName}
-          style={{
-            flex: '1 1 300px',
-            minWidth: '424px',
-            maxWidth: '33%',
-          }}
-        >
+        <div key={cityName} className='city'>
           <TemperatureChart
             cityName={cityName}
             latitude={latitude}
