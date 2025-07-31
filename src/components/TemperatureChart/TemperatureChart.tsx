@@ -93,7 +93,7 @@ const TemperatureChart: React.FC<Props> = ({latitude, longitude, cityName}) => {
     labels: labels.map(t => new Date(t)),
     datasets: [
       {
-        label: 'Температура (°C)',
+        label: 'Температура (°C)1',
         data: temps,
         fill: false,
         borderColor: 'rgba(75,192,192,1)',
@@ -136,7 +136,7 @@ const TemperatureChart: React.FC<Props> = ({latitude, longitude, cityName}) => {
       },
     },
     plugins: {
-      legend: {display: true, position: 'top' as const},
+      legend: {display: false, position: 'top' as const},
       tooltip: {mode: 'index' as const, intersect: false},
     },
   }
