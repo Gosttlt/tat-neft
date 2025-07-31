@@ -1,0 +1,30 @@
+.rangeSelector {
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rangeButton {
+  padding: 6px 12px;
+  background-color: #eee;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.rangeButton:hover {
+  background-color: #ccc;
+}
+
+.active {
+  background-color: #4bc0c0;
+  color: white;
+}
+
+.chartContainer {
+  flex: 1;
+  min-width: 0;
+  height: 500px;
+}
