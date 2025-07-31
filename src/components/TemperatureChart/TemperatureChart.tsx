@@ -12,7 +12,6 @@ import {
   TimeScale,
 } from 'chart.js'
 import 'chartjs-adapter-date-fns'
-import {addHours, formatISO, subHours} from 'date-fns'
 import {ru} from 'date-fns/locale'
 import {Props} from '../../types'
 import {aggregateDaily} from '../../utils/aggregateDaily'
