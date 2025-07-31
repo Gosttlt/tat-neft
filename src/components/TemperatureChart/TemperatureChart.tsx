@@ -12,7 +12,7 @@ import {
   TimeScale,
 } from 'chart.js'
 import 'chartjs-adapter-date-fns'
-import {formatISO, subHours} from 'date-fns'
+import {addHours, formatISO, subHours} from 'date-fns'
 import {ru} from 'date-fns/locale'
 import {Props} from '../../types'
 import {aggregateDaily} from '../../utils/aggregateDaily'
@@ -53,12 +53,8 @@ const TemperatureChart: React.FC<Props> = ({latitude, longitude, cityName}) => {
     queryKey: readonly [string, number, number, number]
   }) => {
     const [, latitude, longitude, hours] = queryKey
-    const end = new Date()
-    const start = subHours(end, hours)
-    const startISO = formatISO(start)
-    const endISO = formatISO(end)
 
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m&start=${startISO}&end=${endISO}&timezone=Europe/Moscow`
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m&forecast_hours=${hours}&timezone=Europe/Moscow`
     const response = await fetch(url)
     if (!response.ok) throw new Error(`Ошибка API: ${response.statusText}`)
     return await response.json()
@@ -88,7 +84,10 @@ const TemperatureChart: React.FC<Props> = ({latitude, longitude, cityName}) => {
   const data = query.data!
   const {labels, temps} = isAggregate
     ? aggregateDaily(data)
-    : {labels: data.hourly.time, temps: data.hourly.temperature_2m}
+    : {
+        labels: data.hourly.time,
+        temps: data.hourly.temperature_2m,
+      }
 
   const chartData = {
     labels: labels.map(t => new Date(t)),
