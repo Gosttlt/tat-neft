@@ -47,3 +47,8 @@
   padding: 24px;
   justify-content: center;
 }
+.city {
+  flex: '1 1 300px';
+  min-width: '424px';
+  max-width: '33%';
+}
