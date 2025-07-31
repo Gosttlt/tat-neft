@@ -50,9 +50,9 @@ const TemperatureChart: React.FC<Props> = ({latitude, longitude, cityName}) => {
   const fetchTemperature = async ({
     queryKey,
   }: {
-    queryKey: readonly [string, number]
+    queryKey: readonly [string, number, number, number]
   }) => {
-    const [, hours] = queryKey
+    const [, latitude, longitude, hours] = queryKey
     const end = new Date()
     const start = subHours(end, hours)
     const startISO = formatISO(start)
@@ -65,7 +65,7 @@ const TemperatureChart: React.FC<Props> = ({latitude, longitude, cityName}) => {
   }
 
   const query = useQuery({
-    queryKey: ['temps', range.hours] as const,
+    queryKey: ['temps', latitude, longitude, range.hours] as const,
     queryFn: fetchTemperature,
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
@@ -151,7 +151,7 @@ const TemperatureChart: React.FC<Props> = ({latitude, longitude, cityName}) => {
         onSelect={setRange}
       />
       <div className={styles.chartContainer}>
-        <Line data={chartData} options={options} />
+        <Line key={range.hours} data={chartData} options={options} />
       </div>
     </div>
   )
